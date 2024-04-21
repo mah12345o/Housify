@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+
+body{
+  font-family: "Nunito", sans-serif !important;
+}
+.cardcontent .bg-img:hover{
+  transform: scale(1.1); 
+  transition: transform .2s;
+}
+
+.cardcontent{
+  position: relative;
+}
+
+.foodAvelaible{
+  left: 14px;
+  position: absolute;
+  top: 29px;
+  background-color:#2d2edf;
+  color: white;
+  border-radius: 2px;
+  padding: 3px 11px;
+  z-index: 9999;
+  border: 1px solid rgba(255, 255, 255, 0.835);
+  border-radius: 0px 8px 8px 1px;
+}
+
+.forRent{
+  left: 13px;
+  position: absolute;
+  bottom: 108px;
+  background-color: #2d2edf;
+  color: white;
+  border-radius: 2px;
+  padding: 3px 11px;
+  z-index: 9999;
+  border-radius: 0px 12px 0px 1px;
+  border: 1px solid white;
+}
+
+.cardtext{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  padding-left: 5px;
+}
+
+.App-header{
+  display: flex;
+
+}
+.App-header a{
+  text-decoration: none;
+  color: white;
+
+}
