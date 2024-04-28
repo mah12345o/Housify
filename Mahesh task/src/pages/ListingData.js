@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { removeItem } from '../redux/action';
+import CardComponent from '../component/CardComponent';
 
 const ListingData = () => {
   const [data, setData] = useState([]);
@@ -55,70 +56,28 @@ const ListingData = () => {
 
   window.addEventListener('scroll', handleScroll);
 
+const feild = data.map((setdata)=>(
+  { 
+    getid:setdata.id,
+    length:data.length,
+    isfood:setdata.foodAvailability,
+    isImg:setdata.thumbnail,
+    isAve:setdata.availableFor,
+    isname:setdata.name,
+    iscityname:setdata.address.city.name,
+    isstatename:setdata.address.state.name,
+    isprice:setdata.displayPrice.fixedPrice,
+    handelSaveData: () => handleSaveData(setdata),
+    handelRemoveData: () => handelRemove(setdata.id),
+  }
+))
+
+
   return (
     <div className='p-2'>
       <div className='row container m-auto ' style={{paddingTop:'100px'}}>
         <h3 style={{ color: 'orange' }}> {data.length} results |<span style={{ color: 'black' }}> Hostel List</span></h3>
-        {data.map((getdata) => (
-          <div className="col-12 col-md-6 col-lg-4 col-xl-4 p-2 cardcontent" key={getdata.id}>
-            {getdata.foodAvailability &&
-              <div className='foodAvelaible d-flex align-items-center'>
-                <IoFastFoodOutline />
-                &nbsp; Food Avelaible
-              </div>
-            }
-            <div className='forRent'>
-              <FaHome />
-              &nbsp;For {getdata.availableFor}
-            </div>
-            <Card style={{ background: ' #f7f7f7', width: '100%', padding: '5px', border: '1px solid #e7e7e7', borderRadius: '8px' }} >
-              <div style={{ overflow: 'hidden' }}>
-                <CardMedia
-                  className='position-relative bg-img'
-                  sx={{ height: 240 }}
-                  image={`https://logiqproperty.blr1.digitaloceanspaces.com/${getdata.thumbnail}`}
-                  title="">
-                </CardMedia>
-              </div>
-              <div className='row'>
-                <div className='col-8 col-md-8 col-lg-8 p-0'>
-                  <CardContent className='p-3 pb-2'>
-                    <Typography className='cardtext' style={{ fontSize: '14px' }} gutterBottom variant="h5" component="div">
-                      {getdata.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      <div style={{ color: '#ff7348' }} className='px-0'>
-                        <FaLocationDot />
-                        {getdata.address.city.name}  {getdata.address.state.name}
-                      </div>
-                      <div style={{ color: 'black' }} className='px-0 pt-1 h5 m-0'>
-                        ₹ {getdata.displayPrice.fixedPrice} Onwards
-                      </div>
-                    </Typography>
-                  </CardContent>
-                </div>
-                <div className='col-4 col-md-4 col-lg-4 p-0'>
-                  <CardActions >
-
-                    {savedcards.find((getid) => getid.id === getdata.id) ?
-
-                      <IconButton aria-label="delete" onClick={() => handelRemove(getdata.id)}>
-                        <FaHeart style={{ color: "blue" }} />
-                      </IconButton >
-                      :
-                      <IconButton aria-label="delete" onClick={() => handleSaveData(getdata)}>
-                        <FaHeart style={{ color: "red" }} />
-                      </IconButton >}
-
-                    <IconButton aria-label="delete" onClick={() => handleSaveData(getdata)}>
-                      <FaShareAlt style={{ fontSize: '20px', color: "#ff7348" }} />
-                    </IconButton >
-                  </CardActions>
-                </div>
-              </div>
-            </Card>
-          </div>
-        ))}
+        <CardComponent data={feild}/>
       </div>
     </div>
   );
