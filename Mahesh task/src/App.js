@@ -17,6 +17,7 @@ const App = () => {
         <Routes>
             <Route path="/saved" element={<SavedData />} />
             <Route path="/home" element={<ListingData />} />
+            <Route path="/" element={<ListingData />} />
         </Routes>
     </Router>
   );

@@ -22,7 +22,7 @@ const SavedData = () => {
     }
     return (
 
-        <div className='row container m-auto p-2'>
+        <div className='row container m-auto ' style={{paddingTop:'100px'}}>
             <h3 style={{ color: 'orange' }}> {savedcards.length === 0 ? "No" : savedcards.length} results <span style={{ color: 'black' }}>|Saved </span></h3>
             {savedcards.map((carddata) => (
                 <div className="col-12 col-md-6 col-lg-4 col-xl-4 p-2 cardcontent" key={carddata.id}>
@@ -64,8 +64,8 @@ const SavedData = () => {
                                     </IconButton >
                                 </CardActions>
                             </div>
-                        </div> 
-                   </Card>
+                        </div>
+                    </Card>
                 </div>
             ))}
         </div>

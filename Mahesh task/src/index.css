@@ -22,7 +22,7 @@ body{
   color: white;
   border-radius: 2px;
   padding: 3px 11px;
-  z-index: 9999;
+  z-index: 8;
   border: 1px solid rgba(255, 255, 255, 0.835);
   border-radius: 0px 8px 8px 1px;
 }
@@ -35,7 +35,7 @@ body{
   color: white;
   border-radius: 2px;
   padding: 3px 11px;
-  z-index: 9999;
+  z-index: 8;
   border-radius: 0px 12px 0px 1px;
   border: 1px solid white;
 }
@@ -58,4 +58,15 @@ body{
   text-decoration: none;
   color: white;
 
+}
+
+.card-color{
+  background-color: gray;
+}
+
+.header-main{
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  background-color: #ff7348;
 }

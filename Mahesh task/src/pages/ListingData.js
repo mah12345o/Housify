@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../redux/action';
 import IconButton from '@mui/material/IconButton';
 import { FaHome } from "react-icons/fa";
@@ -12,11 +12,14 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { removeItem } from '../redux/action';
 
 const ListingData = () => {
   const [data, setData] = useState([]);
   const [scrollCount, setScrollCount] = useState(1);
   const dispatch = useDispatch();
+  const savedcards = useSelector((state) => state.cartItems);
+  console.log(savedcards)
   // Fetch getdata data from the API
   useEffect(() => {
     const fetchData = async () => {
@@ -32,9 +35,13 @@ const ListingData = () => {
   }, [scrollCount]);
 
   // Function to handle adding getdata to cart
+  const handelRemove = (removeid) => {
+    dispatch(removeItem(removeid));
+  }
+
   const handleSaveData = (getdata) => {
-    localStorage.setItem("PRODUCT_LIST", JSON.stringify(getdata));
-    dispatch(addToCart(getdata));
+      localStorage.setItem("PRODUCT_LIST", JSON.stringify(getdata));
+      dispatch(addToCart(getdata));
   };
 
   // Function to handle scroll event
@@ -50,7 +57,7 @@ const ListingData = () => {
 
   return (
     <div className='p-2'>
-      <div className='row container m-auto'>
+      <div className='row container m-auto ' style={{paddingTop:'100px'}}>
         <h3 style={{ color: 'orange' }}> {data.length} results |<span style={{ color: 'black' }}> Hostel List</span></h3>
         {data.map((getdata) => (
           <div className="col-12 col-md-6 col-lg-4 col-xl-4 p-2 cardcontent" key={getdata.id}>
@@ -92,9 +99,17 @@ const ListingData = () => {
                 </div>
                 <div className='col-4 col-md-4 col-lg-4 p-0'>
                   <CardActions >
-                    <IconButton aria-label="delete" onClick={() => handleSaveData(getdata)}>
-                      <FaHeart style={{ color: "#ff7348" }} />
-                    </IconButton >
+
+                    {savedcards.find((getid) => getid.id === getdata.id) ?
+
+                      <IconButton aria-label="delete" onClick={() => handelRemove(getdata.id)}>
+                        <FaHeart style={{ color: "blue" }} />
+                      </IconButton >
+                      :
+                      <IconButton aria-label="delete" onClick={() => handleSaveData(getdata)}>
+                        <FaHeart style={{ color: "red" }} />
+                      </IconButton >}
+
                     <IconButton aria-label="delete" onClick={() => handleSaveData(getdata)}>
                       <FaShareAlt style={{ fontSize: '20px', color: "#ff7348" }} />
                     </IconButton >
